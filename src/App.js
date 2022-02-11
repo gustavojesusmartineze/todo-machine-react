@@ -33,11 +33,20 @@ function App() {
     });
   }
 
-  const completeTodos = (text) => {
+  const completeTodo = (text) => {
     const todoIndex = todos.findIndex((todo) => todo.text === text);
 
     const newTodos = [...todos];
     newTodos[todoIndex].completed = !todos[todoIndex].completed;
+
+    setTodos(newTodos);
+  }
+
+  const deleteTodo = (text) => {
+    const todoIndex = todos.findIndex((todo) => todo.text === text);
+
+    const newTodos = [...todos];
+    newTodos.splice(todoIndex, 1);
 
     setTodos(newTodos);
   }
@@ -59,7 +68,8 @@ function App() {
             key={todo.text}
             text={todo.text}
             completed={todo.completed}
-            onComplete={() => completeTodos(todo.text) }
+            onComplete={() => completeTodo(todo.text) }
+            onDelete={() => deleteTodo(todo.text) }
           />
         ))}
       </TodoList>

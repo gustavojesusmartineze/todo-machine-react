@@ -1,16 +1,6 @@
 import './TodoItem.css';
 
 function TodoItem(props){
-
-  // const onComplete = () => {
-  //   props.completeTodos();
-  //   console.log('onComplete Clicked for: ' + props.text);
-  // }
-  
-  const onDelete = () => {
-    console.log('onDelete Clicked for: ' + props.text);
-  }
-
   return(
     <li className="TodoItem">
       <span
@@ -26,7 +16,7 @@ function TodoItem(props){
       </p>
       <span
         className="Icon Icon-delete"
-        onClick={onDelete}
+        onClick={props.onDelete}
       >
         X
       </span>
