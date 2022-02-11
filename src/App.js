@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { TodoCounter } from './TodoCounter/';
 import { TodoSearch } from './TodoSearch/';
 import { TodoList } from './TodoList/';
@@ -14,10 +14,15 @@ const todos = [
 ];
 
 function App() {
+  const [searchValue, setSearchValue] = useState('');
+
   return (
     <React.Fragment>
       <TodoCounter />
-      <TodoSearch />
+      <TodoSearch 
+        searchValue={searchValue} 
+        setSearchValue={setSearchValue}
+      />
 
       <TodoList>
         {todos.map(todo => (
