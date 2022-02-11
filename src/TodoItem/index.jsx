@@ -2,9 +2,10 @@ import './TodoItem.css';
 
 function TodoItem(props){
 
-  const onComplete = () => {
-    console.log('onComplete Clicked for: ' + props.text);
-  }
+  // const onComplete = () => {
+  //   props.completeTodos();
+  //   console.log('onComplete Clicked for: ' + props.text);
+  // }
   
   const onDelete = () => {
     console.log('onDelete Clicked for: ' + props.text);
@@ -14,7 +15,7 @@ function TodoItem(props){
     <li className="TodoItem">
       <span
         className={`Icon Icon-check ${props.completed && 'Icon-check--active'}`}
-        onClick={onComplete}
+        onClick={props.onComplete}
       >
         √
       </span>
