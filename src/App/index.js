@@ -8,19 +8,34 @@ import { AppUI } from './AppUI';
 //   { text: 'Llorar con la llorona', completed: false },
 //   { text: 'LALALALAA', completed: false },
 // ];
-
-function App() {
-  const localStorageTodo = localStorage.getItem('TODOS_V1');
-  let parsedTodos;
-
-  if (!localStorageTodo) {
-    localStorage.setItem('TODOS_V1', JSON.stringify([]));
-    parsedTodos = [];
+function useLocalStorage(itemName, initialValue) {
+  const localStorageItem = localStorage.getItem(itemName);
+  
+  let parsedItem;
+  
+  if (!localStorageItem) {
+    localStorage.setItem(itemName, JSON.stringify(initialValue));
+    parsedItem = initialValue;
   } else {
-    parsedTodos = JSON.parse(localStorageTodo);
+    parsedItem = JSON.parse(localStorageItem);
   }
 
-  const [todos, setTodos ] = useState(parsedTodos);
+  const [item, setItem ] = useState(parsedItem);
+
+  const saveItem = (newItem) => {
+    localStorage.setItem(itemName, JSON.stringify(newItem));
+
+    setItem(newItem);
+  }
+
+  return [
+    item, 
+    saveItem
+  ];
+}
+
+function App() {
+  const [todos, saveTodos ] = useLocalStorage('TODOS_V1', []);
   const [searchValue, setSearchValue] = useState('');
 
   const completedTodos = todos.filter((item) => !!item.completed).length;
@@ -37,12 +52,6 @@ function App() {
 
       return todoText.includes(searchText);
     });
-  }
-
-  const saveTodos = (newTodos) => {
-    localStorage.setItem('TODOS_V1', JSON.stringify(newTodos));
-
-    setTodos(newTodos);
   }
 
   const completeTodo = (text) => {
