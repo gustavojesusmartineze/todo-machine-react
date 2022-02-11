@@ -7,32 +7,32 @@ import { CreateTodoButton } from './../CreateTodoButton/';
 import { TodoContext } from './../TodoContext/'
 
 function AppUI () {
+  const {
+    error,
+    loading,
+    searchedTodos,
+    completeTodo,
+    deleteTodo
+  } = React.useContext(TodoContext);
   return (
     <React.Fragment>
       <TodoCounter />
       <TodoSearch />
-
-      <TodoContext.Consumer>
-        {/* we could do it like {error, loading, ..} with Object Destructuring too */}
-        {(value) => { //This value is the same as we set on TodoContext Provider value
-          return (
-            <TodoList>
-              {value.error && <p>There was an error!</p>}
-              {value.loading && <p>We are loading...</p>}
-              {(!value.loading && !value.searchedTodos.length) && <p>Create your first Todo!</p>}
-              {value.searchedTodos.map(todo => (
-                <TodoItem
-                  key={todo.text}
-                  text={todo.text}
-                  completed={todo.completed}
-                  onComplete={() => value.completeTodo(todo.text) }
-                  onDelete={() => value.deleteTodo(todo.text) }
-                />
-              ))}
-            </TodoList>
-          )
-        }}
-      </TodoContext.Consumer>
+  
+      <TodoList>
+        {error && <p>There was an error!</p>}
+        {loading && <p>We are loading...</p>}
+        {(!loading && !searchedTodos.length) && <p>Create your first Todo!</p>}
+        {searchedTodos.map(todo => (
+          <TodoItem
+            key={todo.text}
+            text={todo.text}
+            completed={todo.completed}
+            onComplete={() => completeTodo(todo.text) }
+            onDelete={() => deleteTodo(todo.text) }
+          />
+        ))}
+      </TodoList>
 
       <CreateTodoButton />
     </React.Fragment>
