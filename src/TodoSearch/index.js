@@ -2,7 +2,7 @@ import './TodoSearch.css';
 
 function TodoSearch() {
   const onSearchValueChanged = (event) => {
-    console.log(event.target.value);
+    console.log('Searching for: '+ event.target.value);
   }
 
   return (

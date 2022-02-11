@@ -1,14 +1,14 @@
 import './TodoItem.css';
 
-const onComplete = () => {
-  console.log("Hello onComplete");
-}
-
-const onDelete = () => {
-  console.log("Hello onDelete");
-}
-
 function TodoItem(props){
+
+  const onComplete = () => {
+    console.log('onComplete Clicked for: ' + props.text);
+  }
+  
+  const onDelete = () => {
+    console.log('onDelete Clicked for: ' + props.text);
+  }
 
   return(
     <li className="TodoItem">
