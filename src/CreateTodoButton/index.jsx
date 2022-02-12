@@ -2,15 +2,15 @@ import './CreateTodoButton.css';
 
 
 function CreateTodoButton(props) {
-  const handleClick = (msg) => {
-    console.log(msg);
+  const handleClick = () => {
+    props.setOpenModal(!props.openModal);
   }
 
   
   return (
     <button 
       className="CreateTodoButton"
-      onClick={() => { handleClick("My message") } }
+      onClick={() => { handleClick() } }
     >
       +
     </button>
