@@ -47,6 +47,17 @@ function TodoProvider(props) {
     saveTodos(newTodos);
   }
 
+  const addTodo = (text) => {
+    const newTodos = [...todos];
+
+    newTodos.push({
+      completed: false,
+      text: text
+    });
+
+    saveTodos(newTodos);
+  }
+
   return (
     <TodoContext.Provider value={{
       error,
@@ -56,6 +67,7 @@ function TodoProvider(props) {
       searchValue,
       setSearchValue,
       searchedTodos,
+      addTodo,
       completeTodo,
       deleteTodo,
       openModal,
